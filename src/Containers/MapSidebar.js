@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
-import * as actions from '../redux/actions/toggleSidebar'
+import * as actions from '../redux/sidebar/actions'
 
 import FormMarker from './FormMarker'
 import { Sidebar } from '../Components'

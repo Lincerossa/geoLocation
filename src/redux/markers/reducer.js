@@ -1,4 +1,7 @@
-import { MARKERS_ADD, MARKERS_RETRIEVE } from '../actions/manageMarkers'
+import {
+  MARKERS_RETRIEVE,
+  MARKERS_ADD,
+} from './types'
 
 const initialState = []
 

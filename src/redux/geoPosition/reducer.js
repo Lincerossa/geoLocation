@@ -1,8 +1,9 @@
+
 import {
-  GEOPOSITION_UPDATE,
   GEOPOSITION_DENY,
-  GEOPOSITION_LOAD,
-} from '../actions/getGeoPosition'
+  GEOPOSITION_UPDATE,
+  GEOPOSITION_LOAD
+} from './types'
 
 const initialState = {
   lat: null,

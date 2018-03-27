@@ -1,14 +1,15 @@
 import { combineReducers } from 'redux'
-import geoPosition from './geoPosition'
-import login from './login'
-import markers from './markers'
-import sidebar from './sidebar'
 import { reducer as formReducer } from 'redux-form'
+
+import geoPosition from './geoPosition/reducer'
+import markers from './markers/reducer'
+import login from './login/reducer'
+import sidebar from './sidebar/reducer'
 
 export default combineReducers({
   geoPosition,
-  login,
   markers,
+  login,
   sidebar,
   form: formReducer,
-})
+}) 

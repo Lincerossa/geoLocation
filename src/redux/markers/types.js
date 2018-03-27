@@ -1,0 +1,2 @@
+export const MARKERS_ADD = 'MARKERS_ADD'
+export const MARKERS_RETRIEVE = 'MARKERS_RETRIEVE'

@@ -1,9 +1,10 @@
+import {
+  MARKERS_ADD,
+  MARKERS_RETRIEVE,
+} from './types'
 
-import uiid from 'uuid/v4'
 import { getDatabaseReference, getArrFromObj } from '../../utility'
-
-export const MARKERS_ADD = 'MARKERS_ADD'
-export const MARKERS_RETRIEVE = 'MARKERS_RETRIEVE'
+import { addMarkerToDatabase } from './utility'
 
 const retrieveMarkers = markers => ({
   type: MARKERS_RETRIEVE,
@@ -15,18 +16,10 @@ const addMarker = (marker) => ({
   marker,
 })
 
-const addMarkerToDatabase = (marker, ref) => {
-
-  const id = uiid()
-
-  return ref.update({
-    [id]: marker,
-  })
-}
 
 export function manageMarkers(marker) {
 
-  return async (dispatch, getState) => {    
+  return async (dispatch, getState) => {
     const ref = getDatabaseReference('markers/')
 
     if (marker) {

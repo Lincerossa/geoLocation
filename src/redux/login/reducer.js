@@ -1,6 +1,4 @@
-import { LOGOUT } from '../actions/logout'
-import { LOGIN } from '../actions/handleLogin'
-
+import { LOGOUT, LOGIN } from './types'
 
 const initialState = {
   username: null,

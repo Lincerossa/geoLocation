@@ -1,7 +1,7 @@
 import { getDatabaseReference } from '../../utility'
 
-export const LOGIN = 'LOGIN'
-
+import { LOGIN } from './types'
+import { setUserAsGuest, findElementInObjectList } from './utility'
 
 const actionUsername = ({ username, isGuest, guestNameAlreadyTaken }) => ({
   type: LOGIN,
@@ -14,28 +14,14 @@ const actionUsername = ({ username, isGuest, guestNameAlreadyTaken }) => ({
 })
 
 
-
-const setUserAsGuest = (username) => {
-  const users = getDatabaseReference('login/guests');
-  users.update({
-    [username]: '',
-  })
-}
-
-
-const findElementInObjectList = (obj,elementToFind) => (
-  Object.keys(obj).find(e => e === elementToFind) !== undefined
-)
-
-
 export function handleLogin(username) {
   return (dispatch) => {
     getDatabaseReference('login/users')
       .on('value', (snapshot) => {
-       
+
         const users = snapshot.val()
         const registeredUser = findElementInObjectList(users, username)
-        
+
         if (registeredUser) {
           const action = actionUsername({ username, isGuest: false });
           dispatch(action)
@@ -59,9 +45,9 @@ export function handleLogin(username) {
 
             return false
           })
-        
 
-        
+
+
       }, (errorObject) => {
         const action = actionUsername({ username: null, userChecked: false });
         dispatch(action)

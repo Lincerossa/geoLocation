@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import { GoogleMap } from '../Components'
 
-import * as actions from '../redux/actions/manageMarkers';
+import * as actions from '../redux/markers/actions';
 
 class MapContainer extends Component {
 

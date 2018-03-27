@@ -1,12 +1,9 @@
-export const SIDEBAR_OPEN = 'SIDEBAR_OPEN'
-export const SIDEBAR_CLOSE = 'SIDEBAR_CLOSE'
-
+import { SIDEBAR_OPEN, SIDEBAR_CLOSE } from './types'
 
 
 export const toggleSidebar = (sidebar) => {
 
   if (sidebar) {
-    console.log("open")
     return {
       type: SIDEBAR_OPEN,
       sidebar,

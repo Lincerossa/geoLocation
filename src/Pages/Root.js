@@ -6,7 +6,7 @@ import { Loading, Button } from '../Components'
 
 import { Redirect } from 'react-router-dom'
 
-import * as actions from "../redux/actions/getGeoPosition";
+import * as actions from "../redux/geoPosition/actions";
 
 const handleBeginClick = (getGeoPosition) => {
   getGeoPosition()

@@ -1,7 +1,7 @@
 import React,  { Component } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
-import * as actions from '../redux/actions/handleLogin'
+import * as actions from '../redux/login/actions'
 
 import { Input } from '../Components'
 
