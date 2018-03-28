@@ -1,8 +1,8 @@
 
 import {
-  GEOPOSITION_DENY,
-  GEOPOSITION_UPDATE,
-  GEOPOSITION_LOAD
+  GEOLOCATION_DENY,
+  GEOLOCATION_UPDATE,
+  GEOLOCATION_LOAD
 } from './types'
 
 const initialState = {
@@ -16,22 +16,22 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
 
-    case GEOPOSITION_UPDATE:
+    case GEOLOCATION_UPDATE:
       return {
         ...state,
-        ...action.position,
+        ...action.location,
         loading: false,
         error: null,
       }
 
-    case GEOPOSITION_DENY:
+    case GEOLOCATION_DENY:
       return {
         ...state,
         loading: null,
         error: true,
       }
 
-    case GEOPOSITION_LOAD:
+    case GEOLOCATION_LOAD:
       return {
         ...state,
         loading: true,

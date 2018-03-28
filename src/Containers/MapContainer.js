@@ -24,7 +24,7 @@ class MapContainer extends Component {
 
   render() {
     const {
-      geoPosition,
+      geoLocation,
       markers,
       highlightMarker,
       showHighlightMarker,
@@ -35,7 +35,7 @@ class MapContainer extends Component {
       lat,
       lng,
       loading
-    } = geoPosition
+    } = geoLocation
     
     return (
       <GoogleMap
@@ -52,7 +52,7 @@ class MapContainer extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  geoPosition: state.geoPosition,
+  geoLocation: state.geoLocation,
   markers: state.markers,
   highlightMarker: state.highlightMarker,
 })

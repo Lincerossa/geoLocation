@@ -6,15 +6,15 @@ import { Loading, Button } from '../Components'
 
 import { Redirect } from 'react-router-dom'
 
-import * as actions from "../redux/geoPosition/actions";
+import * as actions from "../redux/geoLocation/actions";
 
-const handleBeginClick = (getGeoPosition) => {
-  getGeoPosition()
+const handleBeginClick = (getGeoLocation) => {
+  getGeoLocation()
 }
 
-const Root = ({ geoPosition, history, getGeoPosition }) => {
+const Root = ({ geoLocation, history, getGeoLocation }) => {
   
-  if (geoPosition.lat && geoPosition.lng) {
+  if (geoLocation.lat && geoLocation.lng) {
     return (
       <Redirect to="/map" />
     )
@@ -23,8 +23,8 @@ const Root = ({ geoPosition, history, getGeoPosition }) => {
   return(
 
     <Container>
-      {geoPosition.loading && <Loading />}
-      <Button onClick={() => handleBeginClick(getGeoPosition)}>
+      {geoLocation.loading && <Loading />}
+      <Button onClick={() => handleBeginClick(getGeoLocation)}>
         Geolocalizzami
       </Button>
 
@@ -44,7 +44,7 @@ const Container = styled.div`
 `
 
 const mapStateToProps = (state) => ({
-  geoPosition: state.geoPosition,
+  geoLocation: state.geoLocation,
 })
 
 

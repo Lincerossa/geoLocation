@@ -15,7 +15,7 @@ import theme from './theme'
 import registerServiceWorker from './registerServiceWorker';
 
 const testState = {
-  geoPosition: {
+  geoLocation: {
     lat: 45,
     lng: 9,
     loading: false,

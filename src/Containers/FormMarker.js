@@ -92,7 +92,7 @@ class FormMarker extends Component {
   render() {
     return(
       <ConnectedForm
-        handleSubmit={(e) => this.handleSubmit({e, ...this.props.geoPosition})}
+        handleSubmit={(e) => this.handleSubmit({e, ...this.props.geoLocation})}
         fields={fields}
       />
     )
@@ -100,7 +100,7 @@ class FormMarker extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  geoPosition: state.geoPosition,
+  geoLocation: state.geoLocation,
   form: state.form,
 })
 

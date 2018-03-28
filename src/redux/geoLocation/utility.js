@@ -1,5 +1,5 @@
-export const askForGeoPosition = () => new Promise((resolve, reject) => {
-  navigator.geolocation.getCurrentPosition(() => {
+export const askForGeoLocation = () => new Promise((resolve, reject) => {
+  navigator.geolocation.getCurrentLocation(() => {
     console.log('yogurt')
   }, reject)
 })
