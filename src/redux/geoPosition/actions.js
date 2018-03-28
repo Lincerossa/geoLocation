@@ -28,7 +28,10 @@ export const getGeoPosition = () => async (dispatch) => {
     .catch(() => {
       dispatch(denyGeoPosition())
     })
-  if (!position) return
+  if (!position) {
+    dispatch(denyGeoPosition())
+    return false
+  }
   const { coords } = position;
   const { latitude: lat, longitude: lng } = coords;
 

@@ -3,7 +3,13 @@ import { connect } from 'react-redux'
 
 import { GoogleMap } from '../Components'
 
-import * as actions from '../redux/markers/actions';
+import * as markersReducers from '../redux/markers/actions';
+import * as markersHighlight from '../redux/highlightMarker/actions';
+
+const actions = {
+  ...markersReducers,
+  ...markersHighlight,
+}
 
 class MapContainer extends Component {
 
@@ -17,7 +23,13 @@ class MapContainer extends Component {
   }
 
   render() {
-    const { geoPosition, markers } = this.props
+    const {
+      geoPosition,
+      markers,
+      highlightMarker,
+      showHighlightMarker,
+      hideHighlightMarker
+    } = this.props
 
     const {
       lat,
@@ -27,6 +39,9 @@ class MapContainer extends Component {
     
     return (
       <GoogleMap
+        hideHighlightMarker={hideHighlightMarker}
+        showHighlightMarker={showHighlightMarker}
+        highlightMarker={highlightMarker}
         markers={markers}
         center={{ lat, lng }}
         zoom={!loading ? 9 : 2}
@@ -39,6 +54,7 @@ class MapContainer extends Component {
 const mapStateToProps = (state) => ({
   geoPosition: state.geoPosition,
   markers: state.markers,
+  highlightMarker: state.highlightMarker,
 })
 
 
