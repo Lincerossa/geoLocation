@@ -18,6 +18,7 @@ const testState = {
   geoLocation: {
     lat: 45,
     lng: 9,
+    zoom: 9,
     loading: false,
     address: 'marcello luatti',
     error: null

@@ -11,6 +11,7 @@
     "firebase": "^4.11.0",
     "firebase-admin": "^5.10.0",
     "geolib": "^2.0.24",
+    "popmotion": "^8.1.22",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-google-maps": "^9.4.5",

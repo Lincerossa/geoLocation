@@ -3,12 +3,14 @@ import { connect } from 'react-redux'
 
 import { GoogleMap } from '../Components'
 
-import * as markersReducers from '../redux/markers/actions';
-import * as markersHighlight from '../redux/highlightMarker/actions';
+import * as actionsMarkers from '../redux/markers/actions';
+import * as actionsHighlightMarker from '../redux/highlightMarker/actions';
+import * as actionOnIdle from '../redux/mapPosition/actions';
 
 const actions = {
-  ...markersReducers,
-  ...markersHighlight,
+  ...actionsMarkers,
+  ...actionsHighlightMarker,
+  ...actionOnIdle,
 }
 
 class MapContainer extends Component {
@@ -22,37 +24,55 @@ class MapContainer extends Component {
     this.props.manageMarkers()
   }
 
+
+  onChangeEnd(tutto){
+    console.log("end tutto", tutto)
+  }
+
+  onChangeStart(tutto) {
+    console.log("start tutto", tutto)
+  }
+
   render() {
     const {
       geoLocation,
+      mapPosition,
       markers,
       highlightMarker,
       showHighlightMarker,
-      hideHighlightMarker
+      hideHighlightMarker,
+      onIdle,
     } = this.props
 
     const {
       lat,
       lng,
-      loading
-    } = geoLocation
+      loading,
+      zoom,
+    } = mapPosition || geoLocation
     
     return (
-      <GoogleMap
-        hideHighlightMarker={hideHighlightMarker}
-        showHighlightMarker={showHighlightMarker}
-        highlightMarker={highlightMarker}
-        markers={markers}
-        center={{ lat, lng }}
-        zoom={!loading ? 9 : 2}
-        showMarker={!loading}
-      />
+      <React.Fragment>
+        <GoogleMap
+          hideHighlightMarker={hideHighlightMarker}
+          showHighlightMarker={showHighlightMarker}
+          highlightMarker={highlightMarker}
+          onIdle={onIdle}
+          markers={markers}
+          center={{ lat, lng }}
+          zoom={zoom}
+          showMarker={!loading}
+        />
+        <p onClick={hideHighlightMarker}>chiudi</p>
+      </React.Fragment>
+
     )
   }
 }
 
 const mapStateToProps = (state) => ({
   geoLocation: state.geoLocation,
+  mapPosition: state.mapPosition,
   markers: state.markers,
   highlightMarker: state.highlightMarker,
 })

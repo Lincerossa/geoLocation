@@ -7,6 +7,7 @@ export default (state = initialState, action) => {
   switch (action.type) {
 
     case SIDEBAR_OPEN:
+      if(state === action.sidebar) return initialState
       return action.sidebar
 
     case SIDEBAR_CLOSE:
