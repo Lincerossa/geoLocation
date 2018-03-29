@@ -8,13 +8,14 @@ const { MarkerClusterer } = require("react-google-maps/lib/components/addons/Mar
 const { InfoBox } = require('react-google-maps/lib/components/addons/InfoBox')
 
 
-const MyInfoBox = ({ hideHighlightMarker, center, highlightMarker, markers }) => {
+const MyInfoBox = ({ deselectMarker, center, highlightMarker, markers }) => {
 
-  const marker = markers.find(marker => marker.id === highlightMarker)
+  const marker = markers.listOfMarkers.find(marker => marker.id === markers.selectedMarker)
+  
   return (
     <InfoBox
       onCloseClick={() => {
-        hideHighlightMarker()
+        deselectMarker()
         return false
       }}
       defaultPosition={new window.google.maps.LatLng(center.lat, center.lng)}
@@ -41,11 +42,10 @@ class Map extends Component {
     const {
       center,
       zoom,
-      highlightMarker,
       markers,
-      showHighlightMarker,
-      hideHighlightMarker,
-      onIdle,
+      updateMapPosition,
+      selectMarker,
+      deselectMarker,
     } = this.props
 
     return (
@@ -53,7 +53,7 @@ class Map extends Component {
         zoom={zoom}
         center={center}
         ref={ mappina => this.map = mappina}
-        onDragEnd={() => onIdle({ 
+        onDragEnd={() => updateMapPosition({ 
             lat: this.map.getCenter().lat(), 
             lng: this.map.getCenter().lng(), 
             loading: false,
@@ -64,36 +64,36 @@ class Map extends Component {
         <React.Fragment>
 
         {
-          highlightMarker &&
+          markers.selectedMarker &&
             <MyInfoBox
-              hideHighlightMarker={hideHighlightMarker}
               center={center}
+              deselectMarker={deselectMarker}
               markers={markers}
-              highlightMarker={highlightMarker}
             />
         }
         
 
         {
           markers &&
-          markers.length &&
+          markers.listOfMarkers &&
+          markers.listOfMarkers.length &&
           <MarkerClusterer
             averageCenter
             enableRetinaIcons
             gridSize={2}
           >
             {
-              markers.map((marker, index) => (
+              markers.listOfMarkers.map((marker, index) => (
                 <Marker
                   key={marker.id}
                   onClick={() => {
-                    onIdle({
+                    updateMapPosition({
                       lat: marker.lat,
                       lng: marker.lng,
                       loading: false,
                       zoom: this.map.getZoom(),
                     }) 
-                    showHighlightMarker(marker.id)}
+                    selectMarker(marker.id)}
                   }
                   position={{ lat: marker.lat, lng: marker.lng }}
                 />

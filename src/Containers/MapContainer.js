@@ -4,13 +4,11 @@ import { connect } from 'react-redux'
 import { GoogleMap } from '../Components'
 
 import * as actionsMarkers from '../redux/markers/actions';
-import * as actionsHighlightMarker from '../redux/highlightMarker/actions';
-import * as actionOnIdle from '../redux/mapPosition/actions';
+import * as actionMapPosition from '../redux/mapPosition/actions';
 
 const actions = {
   ...actionsMarkers,
-  ...actionsHighlightMarker,
-  ...actionOnIdle,
+  ...actionMapPosition,
 }
 
 class MapContainer extends Component {
@@ -25,23 +23,14 @@ class MapContainer extends Component {
   }
 
 
-  onChangeEnd(tutto){
-    console.log("end tutto", tutto)
-  }
-
-  onChangeStart(tutto) {
-    console.log("start tutto", tutto)
-  }
-
   render() {
     const {
       geoLocation,
       mapPosition,
       markers,
-      highlightMarker,
-      showHighlightMarker,
-      hideHighlightMarker,
-      onIdle,
+      deselectMarker,
+      selectMarker,
+      updateMapPosition,
     } = this.props
 
     const {
@@ -54,16 +43,14 @@ class MapContainer extends Component {
     return (
       <React.Fragment>
         <GoogleMap
-          hideHighlightMarker={hideHighlightMarker}
-          showHighlightMarker={showHighlightMarker}
-          highlightMarker={highlightMarker}
-          onIdle={onIdle}
+          updateMapPosition={updateMapPosition}
+          selectMarker={selectMarker}
+          deselectMarker={deselectMarker}
           markers={markers}
           center={{ lat, lng }}
           zoom={zoom}
           showMarker={!loading}
         />
-        <p onClick={hideHighlightMarker}>chiudi</p>
       </React.Fragment>
 
     )
@@ -74,7 +61,6 @@ const mapStateToProps = (state) => ({
   geoLocation: state.geoLocation,
   mapPosition: state.mapPosition,
   markers: state.markers,
-  highlightMarker: state.highlightMarker,
 })
 
 

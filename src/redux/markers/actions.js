@@ -1,6 +1,8 @@
 import {
   MARKERS_ADD,
   MARKERS_RETRIEVE,
+  MARKERS_SELECT,
+  MARKERS_DESELECT,
 } from './types'
 
 import { getDatabaseReference, getArrFromObj } from '../../utility'
@@ -33,3 +35,12 @@ export function manageMarkers(marker) {
     dispatch(retrieveMarkers(markers))
   }
 }
+
+export const selectMarker = (selectedMarker) => ({
+  type: MARKERS_SELECT,
+  selectedMarker,
+})
+
+export const deselectMarker = () => ({
+  type: MARKERS_DESELECT,
+})
