@@ -5,8 +5,7 @@ import {
 } from './types'
 
 
-import { askForGeoLocation } from './utility'
-import { getAddressFromLatLng } from '../../utility'
+import { askForGeoLocation, getAddressFromLatLng } from './utility'
 
 
 const denyMapCenter = () => ({
@@ -25,6 +24,7 @@ const geoLocationDone = (center) => ({
 })
 
 export const getGeoLocation = () => async (dispatch) => {
+  console.log("okokok")
   dispatch(loadMapCenter())
   const location = await askForGeoLocation()
     .catch((e) => {

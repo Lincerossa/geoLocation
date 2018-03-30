@@ -24,7 +24,7 @@ const testState = {
   }
 }
 
-const App = () => {
+const App = (testState) => {
   return (
     <Provider store={configureStore()}>
       <ThemeProvider theme={theme}>

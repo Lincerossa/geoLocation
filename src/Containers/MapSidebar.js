@@ -3,11 +3,17 @@ import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { tween, styler } from 'popmotion'
 
-import * as actions from '../redux/sidebar/actions'
 
 import FormMarker from './FormMarker'
 import { Sidebar } from '../Components'
 
+import * as sidebarActions from '../redux/sidebar/actions'
+import * as mapCenterActions from '../redux/mapCenter/actions';
+
+const actions = {
+  ...sidebarActions,
+  ...mapCenterActions,
+}
 class MyTween extends React.Component {
 
   constructor(props){
@@ -56,12 +62,13 @@ const Ball = styled.div`
 
 
 
-const MapSidebar = ({ sidebar, toggleSidebar }) => (
+const MapSidebar = ({ sidebar, toggleSidebar, getGeoLocation }) => (
   <Sidebar 
     isActive={sidebar && sidebar === 'bookmark'} 
     onClick={toggleSidebar}
     header="sezione inserimento"
   >
+    <ReGeolocalizeMe onClick={getGeoLocation}> Rigeolocalizzami</ReGeolocalizeMe>
     <FormContainer>
       <FormMarker />
     </FormContainer>
@@ -74,7 +81,9 @@ const MapSidebar = ({ sidebar, toggleSidebar }) => (
 const FormContainer = styled.div`
 `
 
-
+const ReGeolocalizeMe = styled.div`
+  border: 1px solid red;
+`
 const mapStateToProps = (state) => ({
   sidebar: state.sidebar,
 })
