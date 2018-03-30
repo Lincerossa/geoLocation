@@ -4,11 +4,11 @@ import { connect } from 'react-redux'
 import { GoogleMap } from '../Components'
 
 import * as actionsMarkers from '../redux/markers/actions';
-import * as actionMapPosition from '../redux/mapPosition/actions';
+import * as actionMapCenter from '../redux/mapCenter/actions';
 
 const actions = {
   ...actionsMarkers,
-  ...actionMapPosition,
+  ...actionMapCenter,
 }
 
 class MapContainer extends Component {
@@ -24,25 +24,25 @@ class MapContainer extends Component {
 
   render() {
     const {
-      geoLocation,
-      mapPosition,
+      mapCenter,
       markers,
       deselectMarker,
       selectMarker,
-      updateMapPosition,
+      updateMapCenter,
     } = this.props
 
+    if( !mapCenter ) return null
     const {
       lat,
       lng,
       loading,
       zoom,
-    } = mapPosition || geoLocation
+    } = mapCenter
     
     return (
       <React.Fragment>
         <GoogleMap
-          updateMapPosition={updateMapPosition}
+          updateMapCenter={updateMapCenter}
           selectMarker={selectMarker}
           deselectMarker={deselectMarker}
           markers={markers}
@@ -57,8 +57,7 @@ class MapContainer extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  geoLocation: state.geoLocation,
-  mapPosition: state.mapPosition,
+  mapCenter: state.mapCenter,
   markers: state.markers,
 })
 

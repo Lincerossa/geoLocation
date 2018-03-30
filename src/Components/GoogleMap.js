@@ -53,7 +53,7 @@ class Cluster extends Component {
 
   render(){
 
-    const { markers, updateMapPosition, selectMarker, deselectMarker, map } = this.props
+    const { markers, updateMapCenter, selectMarker, deselectMarker, map } = this.props
     return(
       <MarkerClusterer
         averageCenter
@@ -66,7 +66,7 @@ class Cluster extends Component {
               key={marker.id}
               onClick={() => {
                 selectMarker()
-                updateMapPosition({
+                updateMapCenter({
                   lat: marker.lat,
                   lng: marker.lng,
                   loading: false,
@@ -100,7 +100,7 @@ class Map extends Component {
       center,
       zoom,
       markers,
-      updateMapPosition,
+      updateMapCenter,
       selectMarker,
       deselectMarker,
     } = this.props
@@ -111,12 +111,13 @@ class Map extends Component {
         center={center}
         ref={ mappina => this.map = mappina}
         onClick={deselectMarker}
-        onDragEnd={() => updateMapPosition({ 
+        onDragEnd={() => {
+          updateMapCenter({ 
             lat: this.map.getCenter().lat(), 
-            lng: this.map.getCenter().lng(), 
-            loading: false,
+            lng: this.map.getCenter().lng(),
             zoom: this.map.getZoom(),
           }) 
+        }
         }
       >
         <React.Fragment>
@@ -140,7 +141,7 @@ class Map extends Component {
               selectMarker={selectMarker}
               deselectMarker={deselectMarker}
               map={this.map}
-              updateMapPosition={updateMapPosition}
+              updateMapCenter={updateMapCenter}
             />
         }
         </React.Fragment>

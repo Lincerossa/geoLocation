@@ -15,18 +15,18 @@ import theme from './theme'
 import registerServiceWorker from './registerServiceWorker';
 
 const testState = {
-  geoLocation: {
+  mapCenter: {
     lat: 45,
     lng: 9,
-    zoom: 12,
+    zoom: 9,
+    address: null,
     loading: false,
-    error: null
   }
 }
 
 const App = () => {
   return (
-    <Provider store={configureStore(testState)}>
+    <Provider store={configureStore()}>
       <ThemeProvider theme={theme}>
         <Router>
           <Pages />

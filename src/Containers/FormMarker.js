@@ -89,7 +89,7 @@ class FormMarker extends Component {
   }
 
   render() {
-    const { lat, lng, address } = this.props.mapPosition || this.props.geoLocation
+    const { lat, lng, address } = this.props.mapCenter
     return(
       <ConnectedForm
         handleSubmit={(e) => this.handleSubmit({e, lat, lng, address})}
@@ -100,8 +100,7 @@ class FormMarker extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  geoLocation: state.geoLocation,
-  mapPosition: state.mapPosition,
+  mapCenter: state.mapCenter,
   form: state.form,
 })
 
