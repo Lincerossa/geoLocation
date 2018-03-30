@@ -22,7 +22,6 @@ class MapContainer extends Component {
     this.props.manageMarkers()
   }
 
-
   render() {
     const {
       geoLocation,

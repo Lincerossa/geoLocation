@@ -5,7 +5,8 @@ import {
 } from './types'
 
 
-import { askForGeoLocation, getAddressFromLatLng } from './utility'
+import { askForGeoLocation } from './utility'
+import { getAddressFromLatLng } from '../../utility'
 
 
 const denyGeoLocation = () => ({

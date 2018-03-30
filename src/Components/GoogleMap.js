@@ -3,12 +3,11 @@ import { compose, withProps } from 'recompose'
 import { withGoogleMap, GoogleMap, Marker } from "react-google-maps"
 import ModalOverlay from './ModalOverlay'
 import styled from 'styled-components'
-
+import {isEqual} from 'lodash'
 const { MarkerClusterer } = require("react-google-maps/lib/components/addons/MarkerClusterer")
 const { InfoBox } = require('react-google-maps/lib/components/addons/InfoBox')
 
-
-const MyInfoBox = ({ deselectMarker, center, highlightMarker, markers }) => {
+const SelectedMarkerLabel = ({ deselectMarker, center, highlightMarker, markers }) => {
 
   const marker = markers.listOfMarkers.find(marker => marker.id === markers.selectedMarker)
   
@@ -30,6 +29,61 @@ const MyInfoBox = ({ deselectMarker, center, highlightMarker, markers }) => {
     </InfoBox>
   )
 
+}
+
+class Cluster extends Component {
+
+  constructor(props){
+    super(props)
+  }
+
+
+  shouldComponentUpdate(nextProps){
+
+    console.log("next props", nextProps)
+    const { listOfMarkers: newMarkers } = nextProps.markers && nextProps.markers
+    const { listOfMarkers: oldMarkers } = this.props.markers
+
+    if (isEqual(newMarkers, oldMarkers)) {
+      console.log("no rerender")
+
+      return false
+    }
+    return true
+  }
+
+
+  render(){
+
+    const { markers, updateMapPosition, selectMarker, map } = this.props
+    return(
+      <MarkerClusterer
+        averageCenter
+        enableRetinaIcons
+        gridSize={2}
+      >
+        {
+          markers.listOfMarkers.map((marker, index) => (
+            <Marker
+              key={marker.id}
+              onClick={() => {
+                updateMapPosition({
+                  lat: marker.lat,
+                  lng: marker.lng,
+                  loading: false,
+                  zoom: map.getZoom(),
+                })
+                selectMarker(marker.id)
+              }
+              }
+              position={{ lat: marker.lat, lng: marker.lng }}
+            />
+          ))}
+      </MarkerClusterer>
+
+
+    )
+  }
 }
 
 
@@ -65,7 +119,7 @@ class Map extends Component {
 
         {
           markers.selectedMarker &&
-            <MyInfoBox
+            <SelectedMarkerLabel
               center={center}
               deselectMarker={deselectMarker}
               markers={markers}
@@ -77,28 +131,12 @@ class Map extends Component {
           markers &&
           markers.listOfMarkers &&
           markers.listOfMarkers.length &&
-          <MarkerClusterer
-            averageCenter
-            enableRetinaIcons
-            gridSize={2}
-          >
-            {
-              markers.listOfMarkers.map((marker, index) => (
-                <Marker
-                  key={marker.id}
-                  onClick={() => {
-                    updateMapPosition({
-                      lat: marker.lat,
-                      lng: marker.lng,
-                      loading: false,
-                      zoom: this.map.getZoom(),
-                    }) 
-                    selectMarker(marker.id)}
-                  }
-                  position={{ lat: marker.lat, lng: marker.lng }}
-                />
-              ))}
-          </MarkerClusterer>
+            <Cluster 
+              markers={markers}
+              selectMarker={selectMarker}
+              map={this.map}
+              updateMapPosition={updateMapPosition}
+            />
         }
         </React.Fragment>
       </GoogleMap>

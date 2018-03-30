@@ -1,7 +1,6 @@
 import { POSITION_UPDATE } from './types'
 
-import { getAddressFromLatLng } from '../geoLocation/utility'
-
+import { getAddressFromLatLng } from '../../utility'
 
 
 const actionCreator = (position) => ({
