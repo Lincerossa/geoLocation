@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import { compose, withProps } from 'recompose'
-import { withGoogleMap, GoogleMap, Marker } from "react-google-maps"
+import { withGoogleMap, GoogleMap, MarkerMarkerClusterer, InfoBox  } from "react-google-maps"
 import ModalOverlay from './ModalOverlay'
 import styled from 'styled-components'
 import {isEqual} from 'lodash'
-const { MarkerClusterer } = require("react-google-maps/lib/components/addons/MarkerClusterer")
-const { InfoBox } = require('react-google-maps/lib/components/addons/InfoBox')
 
 const SelectedMarkerLabel = ({ deselectMarker, center, highlightMarker, markers }) => {
 
@@ -41,23 +39,18 @@ class Cluster extends Component {
 
   shouldComponentUpdate(nextProps){
 
-    console.log("next props", nextProps)
     const { listOfMarkers: newMarkers } = nextProps.markers && nextProps.markers
     const { listOfMarkers: oldMarkers } = this.props.markers
 
-    if (isEqual(newMarkers, oldMarkers)) {
-      console.log("no rerender")
+    const preventUselessRerender = isEqual(newMarkers, oldMarkers)
 
-      return false
-    }
-    console.log("renderrrrrrrrrrrrrrr")
-    return true
+    return !preventUselessRerender
   }
 
 
   render(){
 
-    const { markers, updateMapPosition, selectMarker, map } = this.props
+    const { markers, updateMapPosition, selectMarker, deselectMarker, map } = this.props
     return(
       <MarkerClusterer
         averageCenter
@@ -69,7 +62,7 @@ class Cluster extends Component {
             <Marker
               key={marker.id}
               onClick={() => {
-                console.log("marker cliccato", marker.id)
+                selectMarker()
                 updateMapPosition({
                   lat: marker.lat,
                   lng: marker.lng,
@@ -110,6 +103,7 @@ class Map extends Component {
         zoom={zoom}
         center={center}
         ref={ mappina => this.map = mappina}
+        onClick={deselectMarker}
         onDragEnd={() => updateMapPosition({ 
             lat: this.map.getCenter().lat(), 
             lng: this.map.getCenter().lng(), 
@@ -137,6 +131,7 @@ class Map extends Component {
             <Cluster 
               markers={markers}
               selectMarker={selectMarker}
+              deselectMarker={deselectMarker}
               map={this.map}
               updateMapPosition={updateMapPosition}
             />
