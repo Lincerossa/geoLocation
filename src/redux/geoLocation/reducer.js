@@ -11,6 +11,7 @@ const initialState = {
   loading: null,
   address: null,
   error: null,
+  zoom: 2,
 }
 
 export default (state = initialState, action) => {
@@ -19,7 +20,8 @@ export default (state = initialState, action) => {
     case GEOLOCATION_UPDATE:
       return {
         ...state,
-        ...action.location,
+        ...action.geoLocation,
+        zoom: 15,
         loading: false,
         error: null,
       }

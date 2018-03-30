@@ -12,9 +12,9 @@ const denyGeoLocation = () => ({
   type: GEOLOCATION_DENY,
 })
 
-const updateGeoLocation = (location) => ({
+const updateGeoLocation = (geoLocation) => ({
   type: GEOLOCATION_UPDATE,
-  location,
+  geoLocation,
 })
 
 const loadingGeoLocation = () => ({
@@ -25,7 +25,8 @@ const loadingGeoLocation = () => ({
 export const getGeoLocation = () => async (dispatch) => {
   dispatch(loadingGeoLocation())
   const location = await askForGeoLocation()
-    .catch(() => {
+    .catch((e) => {
+      console.log("err",e)
       dispatch(denyGeoLocation())
     })
   if (!location) {

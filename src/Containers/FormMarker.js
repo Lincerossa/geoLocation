@@ -11,10 +11,10 @@ const ConnectedForm = reduxForm({
 })(Form)
 
 
-const fields = [
+const fields = (address)=>([
   {
     name: 'address',
-    placeholder: 'via volta 55, Gravedona ed Uniti(CO)',
+    placeholder: `${address ? address : 'via volta 55, Gravedona ed Uniti(CO)'}`,
     component: 'input',
     type: 'text',
     label: 'localita'
@@ -33,7 +33,7 @@ const fields = [
     type: 'text',
     label: 'descrizione'
   },
-]
+])
 
 class FormMarker extends Component {
 
@@ -66,7 +66,6 @@ class FormMarker extends Component {
     address,
     lat,
     lng,
-    loading,
   }) {
     e.preventDefault()
 
@@ -90,10 +89,11 @@ class FormMarker extends Component {
   }
 
   render() {
+    const { lat, lng, address } = this.props.mapPosition || this.props.geoLocation
     return(
       <ConnectedForm
-        handleSubmit={(e) => this.handleSubmit({e, ...this.props.geoLocation})}
-        fields={fields}
+        handleSubmit={(e) => this.handleSubmit({e, lat, lng, address})}
+        fields={fields(address)}
       />
     )
   }
@@ -101,6 +101,7 @@ class FormMarker extends Component {
 
 const mapStateToProps = (state) => ({
   geoLocation: state.geoLocation,
+  mapPosition: state.mapPosition,
   form: state.form,
 })
 
