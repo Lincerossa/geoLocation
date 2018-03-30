@@ -1,6 +1,5 @@
 import {
   MARKERS_RETRIEVE,
-  MARKERS_ADD,
   MARKERS_SELECT,
   MARKERS_DESELECT,
 } from './types'
@@ -15,15 +14,6 @@ export default (state = initialState, action) => {
       return {
         listOfMarkers: action.markers,
         selectedMarker: state.selectedMarker,
-      }
-
-    case MARKERS_ADD:
-      return {
-        listOfMarkers: [
-          ...state.listOfMarkers,
-          action.marker,
-        ],
-        selectedMarker: state.selectedMarker,      
       }
 
     case MARKERS_SELECT:

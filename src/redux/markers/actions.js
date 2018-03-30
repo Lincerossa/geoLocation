@@ -1,5 +1,4 @@
 import {
-  MARKERS_ADD,
   MARKERS_RETRIEVE,
   MARKERS_SELECT,
   MARKERS_DESELECT,
@@ -13,11 +12,6 @@ const retrieveMarkers = markers => ({
   markers
 })
 
-const addMarker = (marker) => ({
-  type: MARKERS_ADD,
-  marker,
-})
-
 
 export function manageMarkers(marker) {
 
@@ -26,8 +20,6 @@ export function manageMarkers(marker) {
 
     if (marker) {
       await addMarkerToDatabase(marker, ref)
-      dispatch(addMarker(marker))
-      return false
     }
 
     const snapshot = await ref.once('value')

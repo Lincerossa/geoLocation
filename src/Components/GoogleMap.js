@@ -9,6 +9,7 @@ const { InfoBox } = require('react-google-maps/lib/components/addons/InfoBox')
 
 const SelectedMarkerLabel = ({ deselectMarker, center, highlightMarker, markers }) => {
 
+  
   const marker = markers.listOfMarkers.find(marker => marker.id === markers.selectedMarker)
   
   return (
@@ -49,6 +50,7 @@ class Cluster extends Component {
 
       return false
     }
+    console.log("renderrrrrrrrrrrrrrr")
     return true
   }
 
@@ -67,6 +69,7 @@ class Cluster extends Component {
             <Marker
               key={marker.id}
               onClick={() => {
+                console.log("marker cliccato", marker.id)
                 updateMapPosition({
                   lat: marker.lat,
                   lng: marker.lng,
