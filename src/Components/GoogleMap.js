@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
 import { compose, withProps } from 'recompose'
-import { withGoogleMap, GoogleMap, MarkerMarkerClusterer, InfoBox  } from "react-google-maps"
+import { withGoogleMap, GoogleMap, Marker } from "react-google-maps"
 import ModalOverlay from './ModalOverlay'
 import styled from 'styled-components'
 import {isEqual} from 'lodash'
+
+const { MarkerClusterer } = require("react-google-maps/lib/components/addons/MarkerClusterer")
+const { InfoBox } = require('react-google-maps/lib/components/addons/InfoBox')
 
 const SelectedMarkerLabel = ({ deselectMarker, center, highlightMarker, markers }) => {
 
