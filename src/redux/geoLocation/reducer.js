@@ -5,14 +5,7 @@ import {
   GEOLOCATION_LOAD
 } from './types'
 
-const initialState = {
-  lat: null,
-  lng: null,
-  loading: null,
-  address: null,
-  error: null,
-  zoom: 2,
-}
+const initialState = null
 
 export default (state = initialState, action) => {
   switch (action.type) {

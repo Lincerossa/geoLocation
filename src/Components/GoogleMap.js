@@ -90,6 +90,10 @@ class Cluster extends Component {
 
 class Map extends Component {
 
+
+  constructor(props){
+    super(props)
+  }
   render() {
 
     const {
