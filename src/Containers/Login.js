@@ -45,10 +45,12 @@ class Login extends Component {
   }  
   render() {
     
-    const { login } = this.props
+    const { login, auth } = this.props
     const { value } = this.state
+
     return(
       <Container>
+        <p onClick={ () => auth.login()}> login</p>
         <Form onSubmit={(e) => this.handleSubmit(e)}>
           <Input 
             type="text" 

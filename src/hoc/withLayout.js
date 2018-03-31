@@ -3,9 +3,9 @@ import styled from 'styled-components'
 
 import { Header } from '../Containers'
 
-const withLayout = WrappedComponents => props => (
+const WithLayout = WrappedComponents => props => (
   <Container>
-    <Header />
+    <Header {...props} />
     <Content>
       <WrappedComponents {...props} />
     </Content>
@@ -21,4 +21,4 @@ const Content = styled.div`
   padding-top: 60px;
 `
 
-export default withLayout
+export default WithLayout

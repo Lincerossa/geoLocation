@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import { Provider } from 'react-redux'
 import { ThemeProvider } from 'styled-components'
-import { HashRouter as Router } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
 
 import { compose, withProps } from 'recompose'
 import { withScriptjs } from 'react-google-maps'
