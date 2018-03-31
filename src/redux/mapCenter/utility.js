@@ -5,8 +5,8 @@ export const askForGeoLocation = () => new Promise((resolve, reject) => {
 export const getAddressFromLatLng =  ({ lat, lng }) => {
   const google = window.google
 
-  var geocoder = new google.maps.Geocoder()
-  var location = new google.maps.LatLng(lat, lng)
+  const geocoder = new google.maps.Geocoder()
+  const location = new google.maps.LatLng(lat, lng)
 
   const promiz = new Promise((resolve, reject) => {
 
