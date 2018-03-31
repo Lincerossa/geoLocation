@@ -24,7 +24,6 @@ const Root = ({ mapCenter, history, getGeoLocation, auth }) => {
   return(
 
     <Container>
-      <p onClick={() => auth.login()}> login</p>
       {mapCenter && mapCenter.loading && <Loading />}
       <Button onClick={() => handleBeginClick(getGeoLocation)}>
         Geolocalizzami

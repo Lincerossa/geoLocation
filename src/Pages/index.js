@@ -14,7 +14,7 @@ const Pages = (props) => (
   <Switch>
     <Route exact path='/' component={() => <Root {...props} />} />
     <Route exact path='/map' component={WithLayout(() => <Map {...props} />)} />
-    <Route path='/login' component={WithLayout(() => <Login {...props} />)} />
+    <Route path='/callback' component={() => <Root {...props} />} />
   </Switch>
 )
 

@@ -1,12 +1,34 @@
 import React from 'react'
 import Auth from './Auth.js';
+import styled from 'styled-components'
+import { Button } from '../../Components'
 
 const auth = new Auth();
 
 
-// qui in qualche modo controllo se è tutto ok
 export default WrappedComponent => props => {
-  return(
-    <WrappedComponent {...props} auth={auth} />
+
+  auth.handleAuthentication()
+
+  if (!auth.isAuthenticated()) {
+    return(
+      <LoginContainer>
+        <Button onClick={() => auth.login()}>Effettua l'accesso </Button>
+      </LoginContainer>
+    )
+  }
+
+  return (
+    <React.Fragment>
+      <WrappedComponent {...props} auth={auth} />
+    </React.Fragment>
   )
 }
+
+const LoginContainer = styled.div`
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
